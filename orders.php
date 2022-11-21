@@ -17,7 +17,11 @@
     <body>
     <h1>Список заказов</h1>
 <?php
-
+$pathToFile = $_SERVER['DOCUMENT_ROOT'] . '/orders.txt';
+if (file_exists($pathToFile)) {
+    $GetContentFile = file_get_contents($pathToFile);
+    echo $GetContentFile;
+}
 // read the file and display content here
 
 
