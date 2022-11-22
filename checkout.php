@@ -14,13 +14,15 @@
             <li><a href="http://127.0.0.1:8080/orders.php" title="Список заказов">Список заказов</a></li>
         </ul>
     </header>
+
 <?php
 
 echo 'Модель телевизора: ' .  $_POST['television'];
 
-$formDataStr = 'Имя: ' . $_POST['name'] .'; '. 'Колличество: ' . $_POST['count'] .'; '. 'Television id: ' . $_POST['television'] .';';
+$formDataStr = 'Имя: ' . $_POST['name'] .'; '. 'Колличество: ' . $_POST['count'] .'; '. 'Television id: ' . $_POST['television'] . PHP_EOL;
 
 file_put_contents('orders.txt', $formDataStr, FILE_APPEND);
+
 ?>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
