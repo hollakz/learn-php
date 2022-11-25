@@ -21,10 +21,17 @@
     <h1>Список заказов</h1>
 
     <?php
-    $textWithNl = file_get_contents('orders.txt');
-    $textWithBr = nl2br($textWithNl);
-    echo($textWithBr);
-    // read the file and display content here
+    $rows = file('orders.csv', FILE_SKIP_EMPTY_LINES);
+
+    if(empty($rows)) {
+        echo '<div class="alert alert-info">Заказов нет.</div>';
+    } else {
+        foreach($rows as $row) {
+            //we have one line in $line variable
+            $data = str_getcsv($row, ';');
+            echo "<p>Имя: {$data[0]}, количество: {$data[1]}, артикул: {$data[2]} ";
+        }
+    }
     ?>
 
 </div>
