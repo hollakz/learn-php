@@ -6,14 +6,20 @@
     <title>Магазин Главная</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <style>
+            .container {
+            width: 800px;
+            }
+    </style>
 </head>
 <body>
+
 <div class="container">
     <header>
-        <ul class="header-top">
-            <li><a href="http://127.0.0.1:8080/orders.php" title="Список заказов">Список заказов</a></li>
-        </ul>
-    </header>
+        <nav class="navbar navbar-expand-lg bg-light mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="http://127.0.0.1:8080/orders.php" title="Список заказов" >Список заказов</a>
+            </header>
 
     <form action="checkout.php" method="post">
 
