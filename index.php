@@ -1,3 +1,73 @@
+<?php
+
+$brands = [
+    [
+        'id' => 1,
+        'name' => 'Samsung'
+    ],
+    [
+        'id' => 2,
+        'name' => 'LG'
+    ],
+    [
+        'id' => 3,
+        'name' => 'Sony'
+    ]
+];
+
+$tvs = [
+    [
+        'id' => 1,
+        'brandId' => 1,
+        'modelName' => 'QE65QN900A',
+        'price' => 50001
+    ],
+    [
+        'id' => 2,
+        'brandId' => 1,
+        'modelName' => 'QE65QN900B',
+        'price' => 50002
+    ],
+    [
+        'id' => 3,
+        'brandId' => 2,
+        'modelName' => 'LM55HD',
+        'price' => 50003
+    ],
+    [
+        'id' => 4,
+        'brandId' => 2,
+        'modelName' => 'LM65HD',
+        'price' => 50004
+    ],
+    [
+        'id' => 5,
+        'brandId' => 3,
+        'modelName' => 'QXR-65A95K',
+        'price' => 50005
+    ],
+    [
+        'id' => 6,
+        'brandId' => 3,
+        'modelName' => 'QXR-75A95K',
+        'price' => 50006
+    ]
+];
+
+function findBrandById($brandId, $brands): ?array
+{
+    // найти в массиве брендов нужный по id и вернуть его
+    foreach ($brands as $brand) {
+        if($brandId === $brand['id']) {
+            return $brand;
+        }
+    }
+
+    return null;
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,66 +91,25 @@
                 <a class="navbar-brand" href="http://127.0.0.1:8080/orders.php" title="Список заказов" >Список заказов</a>
             </header>
 
+    <div id="catalog">
+        <h2>Каталог</h2>
+        <?php
+
+        foreach ($tvs as $tv) {
+            $brand = findBrandById($tv['brandId'], $brands);
+            echo "<div class='p-3 mb-3 border'>{$brand['name']} {$tv['modelName']}</div>";
+        }
+
+        ?>
+    </div>
+
+    <h2>Форма заказа</h2>
     <form action="checkout.php" method="post">
 
         <label for="television">Выберете модель телевизора</label>
         <select name="television_id" id="television" class="form-select" aria-label="Default select example">
 
             <?php
-
-            $brands = [
-                [
-                    'id' => 1,
-                    'name' => 'Samsung'
-                ],
-                [
-                    'id' => 2,
-                    'name' => 'LG'
-                ],
-                [
-                    'id' => 3,
-                    'name' => 'Sony'
-                ]
-            ];
-
-            $tvs = [
-                [
-                    'id' => 1,
-                    'brandId' => 1,
-                    'modelName' => 'QE65QN900A',
-                    'price' => 50001
-                ],
-                [
-                    'id' => 2,
-                    'brandId' => 1,
-                    'modelName' => 'QE65QN900B',
-                    'price' => 50002
-                ],
-                [
-                    'id' => 3,
-                    'brandId' => 2,
-                    'modelName' => 'LM55HD',
-                    'price' => 50003
-                ],
-                [
-                    'id' => 4,
-                    'brandId' => 2,
-                    'modelName' => 'LM65HD',
-                    'price' => 50004
-                ],
-                [
-                    'id' => 5,
-                    'brandId' => 3,
-                    'modelName' => 'QXR-65A95K',
-                    'price' => 50005
-                ],
-                [
-                    'id' => 6,
-                    'brandId' => 3,
-                    'modelName' => 'QXR-75A95K',
-                    'price' => 50006
-                ]
-            ];
 
             foreach ($brands as $brand) {
 
