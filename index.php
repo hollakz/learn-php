@@ -27,59 +27,72 @@
         <select name="television_id" id="television" class="form-select" aria-label="Default select example">
 
             <?php
-            $television = [
-                'Samsung' => [
-                    [
-                        'id' => 1, // будет отправвлено в форме
-                        'model' => 'QE65QN900A',
-                        'diagonal' => 42,
-                        'color' => 'white'
-                    ],
-                    [
-                        'id' => 2,
-                        'model' => 'QE65QN900B',
-                        'diagonal' => 50,
-                        'color' => 'white'
-                    ]
+
+            $brands = [
+                [
+                    'id' => 1,
+                    'name' => 'Samsung'
                 ],
-                'LG' => [
-                    [
-                        'id' => 3,
-                        'model' => 'LM55HD',
-                        'diagonal' => 55,
-                        'color' => 'black'
-                    ],
-                    [
-                        'id' => 4,
-                        'model' => 'LM65HD',
-                        'diagonal' => 65,
-                        'color' => 'white'
-                    ]
+                [
+                    'id' => 2,
+                    'name' => 'LG'
                 ],
-                'Sony' => [
-                    [
-                        'id' => 5,
-                        'model' => 'QXR-65A95K',
-                        'diagonal' => 65,
-                        'color' => 'silver'
-                    ],
-                    [
-                        'id' => 6,
-                        'model' => 'QXR-75A95K',
-                        'diagonal' => 75,
-                        'color' => 'black'
-                    ]
-                ],
+                [
+                    'id' => 3,
+                    'name' => 'Sony'
+                ]
             ];
 
+            $tvs = [
+                [
+                    'id' => 1,
+                    'brandId' => 1,
+                    'modelName' => 'QE65QN900A',
+                    'price' => 50001
+                ],
+                [
+                    'id' => 2,
+                    'brandId' => 1,
+                    'modelName' => 'QE65QN900B',
+                    'price' => 50002
+                ],
+                [
+                    'id' => 3,
+                    'brandId' => 2,
+                    'modelName' => 'LM55HD',
+                    'price' => 50003
+                ],
+                [
+                    'id' => 4,
+                    'brandId' => 2,
+                    'modelName' => 'LM65HD',
+                    'price' => 50004
+                ],
+                [
+                    'id' => 5,
+                    'brandId' => 3,
+                    'modelName' => 'QXR-65A95K',
+                    'price' => 50005
+                ],
+                [
+                    'id' => 6,
+                    'brandId' => 3,
+                    'modelName' => 'QXR-75A95K',
+                    'price' => 50006
+                ]
+            ];
 
-            //echo $television['Samsung']['model'];
-            foreach ($television as $brand => $array) {
+            foreach ($brands as $brand) {
 
-                echo '<optgroup label="' . $brand . '">';
+                echo '<optgroup label="' . $brand['name'] . '">';
 
-                foreach ($array as $value) {
-                    echo '<option value="' . $value['id'] . '">' . $brand . ' ' . $value['model'] . ' ' . $value['color'] . '</option>';
+                foreach ($tvs as $tv) {
+
+                    if ($tv['brandId'] !== $brand['id']) {
+                        continue;
+                    }
+
+                    echo '<option value="' . $tv['id'] . '">' . $brand['name']. ' ' . $tv['modelName'] . ' ' . $tv['price'] . '</option>';
                 }
 
                 echo '</optgroup>';
