@@ -82,11 +82,6 @@ function findBrandById($brandId, $brands): ?array
     <title>Магазин Главная</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-    <style>
-            .container {
-            width: 800px;
-            }
-    </style>
 </head>
 <body>
 
@@ -99,12 +94,12 @@ function findBrandById($brandId, $brands): ?array
 
     <div id="catalog">
         <h2>Каталог</h2>
-        <div class="row">
+        <div class="row  justify-content-center">
         <?php
 
         foreach ($tvs as $tv) {
             $brand = findBrandById($tv['brandId'], $brands);
-            echo "<div class='p-3 mb-3 border col-4'><a href='http://127.0.0.1:8080/tv.php?id='>{$brand['name']} {$tv['modelName']} {$tv['image']}</a></div>";
+            echo "<div class='p-3 mb-3 ms-3 border col-3'><a href='http://127.0.0.1:8080/tv.php?id={$tv['id']}'>{$brand['name']} {$tv['modelName']} {$tv['image']}</a></div>";
         }
 
         ?>
