@@ -72,6 +72,14 @@ function findBrandById($brandId, $brands): ?array
     return null;
 }
 
+
+
+// try to connect to sqlite db abd fetch some data
+$db = new SQLite3('db.sqlite');
+$results = $db->query('SELECT * FROM tvs');
+while ($tv = $results->fetchArray(SQLITE3_ASSOC)) {
+    echo "{$tv['name']}";
+}
 ?>
 
 <!DOCTYPE html>
