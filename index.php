@@ -20,37 +20,43 @@ $tvs = [
         'id' => 1,
         'brandId' => 1,
         'modelName' => 'QE65QN900A',
-        'price' => 50001
+        'price' => 50001,
+        'image' => '<img src="image/samsung.jpg" width="100%">'
     ],
     [
         'id' => 2,
         'brandId' => 1,
         'modelName' => 'QE65QN900B',
-        'price' => 50002
+        'price' => 50002,
+        'image' => '<img src="image/samsung.jpg" width="100%">'
     ],
     [
         'id' => 3,
         'brandId' => 2,
         'modelName' => 'LM55HD',
-        'price' => 50003
+        'price' => 50003,
+        'image' => '<img src="image/samsung.jpg" width="100%">'
     ],
     [
         'id' => 4,
         'brandId' => 2,
         'modelName' => 'LM65HD',
-        'price' => 50004
+        'price' => 50004,
+        'image' => '<img src="image/samsung.jpg" width="100%">'
     ],
     [
         'id' => 5,
         'brandId' => 3,
         'modelName' => 'QXR-65A95K',
-        'price' => 50005
+        'price' => 50005,
+        'image' => '<img src="image/samsung.jpg" width="100%">'
     ],
     [
         'id' => 6,
         'brandId' => 3,
         'modelName' => 'QXR-75A95K',
-        'price' => 50006
+        'price' => 50006,
+        'image' => '<img src="image/samsung.jpg" width="100%">'
     ]
 ];
 
@@ -93,14 +99,16 @@ function findBrandById($brandId, $brands): ?array
 
     <div id="catalog">
         <h2>Каталог</h2>
+        <div class="row">
         <?php
 
         foreach ($tvs as $tv) {
             $brand = findBrandById($tv['brandId'], $brands);
-            echo "<div class='p-3 mb-3 border'>{$brand['name']} {$tv['modelName']}</div>";
+            echo "<div class='p-3 mb-3 border col-4'><a href='http://127.0.0.1:8080/tv.php?id='>{$brand['name']} {$tv['modelName']} {$tv['image']}</a></div>";
         }
 
         ?>
+        </div><!-- /.row -->
     </div>
 
     <h2>Форма заказа</h2>
