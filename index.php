@@ -1,85 +1,10 @@
 <?php
-
-$brands = [
-    [
-        'id' => 1,
-        'name' => 'Samsung'
-    ],
-    [
-        'id' => 2,
-        'name' => 'LG'
-    ],
-    [
-        'id' => 3,
-        'name' => 'Sony'
-    ]
-];
-
-$tvs = [
-    [
-        'id' => 1,
-        'brandId' => 1,
-        'modelName' => 'QE65QN900A',
-        'price' => 50001,
-        'image' => '<img src="image/samsung.jpg" width="100%">'
-    ],
-    [
-        'id' => 2,
-        'brandId' => 1,
-        'modelName' => 'QE65QN900B',
-        'price' => 50002,
-        'image' => '<img src="image/samsung.jpg" width="100%">'
-    ],
-    [
-        'id' => 3,
-        'brandId' => 2,
-        'modelName' => 'LM55HD',
-        'price' => 50003,
-        'image' => '<img src="image/samsung.jpg" width="100%">'
-    ],
-    [
-        'id' => 4,
-        'brandId' => 2,
-        'modelName' => 'LM65HD',
-        'price' => 50004,
-        'image' => '<img src="image/samsung.jpg" width="100%">'
-    ],
-    [
-        'id' => 5,
-        'brandId' => 3,
-        'modelName' => 'QXR-65A95K',
-        'price' => 50005,
-        'image' => '<img src="image/samsung.jpg" width="100%">'
-    ],
-    [
-        'id' => 6,
-        'brandId' => 3,
-        'modelName' => 'QXR-75A95K',
-        'price' => 50006,
-        'image' => '<img src="image/samsung.jpg" width="100%">'
-    ]
-];
-
-function findBrandById($brandId, $brands): ?array
-{
-    // найти в массиве брендов нужный по id и вернуть его
-    foreach ($brands as $brand) {
-        if($brandId === $brand['id']) {
-            return $brand;
-        }
-    }
-
-    return null;
-}
-
-
-
-// try to connect to sqlite db abd fetch some data
 $db = new SQLite3('db.sqlite');
-$results = $db->query('SELECT * FROM tvs');
-while ($tv = $results->fetchArray(SQLITE3_ASSOC)) {
-    echo "{$tv['name']}";
-}
+$catalogResults = $db->query('SELECT
+                tvs.id AS tvs_id, tvs.name AS tvs_name, tvs.image_file_name AS tvs_image_file_name, b.name AS brands_name
+                FROM tvs
+                LEFT JOIN brands b ON b.id = tvs.brand_id');
+
 ?>
 
 <!DOCTYPE html>
@@ -105,9 +30,12 @@ while ($tv = $results->fetchArray(SQLITE3_ASSOC)) {
         <div class="row  justify-content-center">
         <?php
 
-        foreach ($tvs as $tv) {
-            $brand = findBrandById($tv['brandId'], $brands);
-            echo "<div class='p-3 mb-3 ms-3 border col-3'><a href='http://127.0.0.1:8080/tv.php?id={$tv['id']}'>{$brand['name']} {$tv['modelName']} {$tv['image']}</a></div>";
+        while ($row = $catalogResults->fetchArray(SQLITE3_ASSOC)) {
+            echo "<div class='p-3 mb-3 ms-3 border col-3'>
+                     <a href='http://127.0.0.1:8080/tv.php?id={$row['tvs_id']}'>{$row['brands_name']} {$row['tvs_name']}
+                        <img src='http://127.0.0.1:8080/image/{$row['tvs_image_file_name']}' width='100%'>
+                     </a>
+                  </div>";
         }
 
         ?>
@@ -126,13 +54,13 @@ while ($tv = $results->fetchArray(SQLITE3_ASSOC)) {
 
                 echo '<optgroup label="' . $brand['name'] . '">';
 
-                foreach ($tvs as $tv) {
+                foreach ($tvs as $row) {
 
-                    if ($tv['brandId'] !== $brand['id']) {
+                    if ($row['brandId'] !== $brand['id']) {
                         continue;
                     }
 
-                    echo '<option value="' . $tv['id'] . '">' . $brand['name']. ' ' . $tv['modelName'] . ' ' . $tv['price'] . '</option>';
+                    echo '<option value="' . $row['id'] . '">' . $brand['name']. ' ' . $row['modelName'] . ' ' . $row['price'] . '</option>';
                 }
 
                 echo '</optgroup>';
