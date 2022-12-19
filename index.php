@@ -1,9 +1,12 @@
 <?php
 $db = new SQLite3('db.sqlite');
+
 $catalogResults = $db->query('SELECT
                 tvs.id AS tvs_id, tvs.name AS tvs_name, tvs.image_file_name AS tvs_image_file_name, b.name AS brands_name
                 FROM tvs
                 LEFT JOIN brands b ON b.id = tvs.brand_id');
+
+$brandResults = $db->query('');
 
 ?>
 
